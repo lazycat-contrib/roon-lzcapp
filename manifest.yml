@@ -1,0 +1,121 @@
+lzc-sdk-version: "0.1"
+name: RoonServer
+package: cloud.lazycat.app.roon
+version: 2.34.0
+description: 关于音乐的一切--浏览、发现、收集和聆听--在Roon的帮助下，参与度提高了10倍。
+homepage: https://roon.app/zh-Hans/
+author: roon
+application:
+    subdomain: roon
+    background_task: true
+
+    public_path:
+        - /
+    routes:
+        - /=file:///lzcapp/pkg/content
+    depends_on:
+        - roon
+    health_check:
+        test_url: http://roon:9330/display
+        start_period: 10s
+
+    ingress:
+        - protocol: tcp
+          port: 9003
+          service: roon
+
+        - protocol: tcp
+          port: 9100
+          service: roon
+
+        - protocol: tcp
+          port: 9101
+          service: roon
+
+        - protocol: tcp
+          port: 9102
+          service: roon
+
+        - protocol: tcp
+          port: 9103
+          service: roon
+
+        - protocol: tcp
+          port: 9200
+          service: roon
+
+        - protocol: tcp
+          port: 30000
+          service: roon
+
+        - protocol: tcp
+          port: 30001
+          service: roon
+
+        - protocol: tcp
+          port: 30002
+          service: roon
+
+        - protocol: tcp
+          port: 30003
+          service: roon
+
+        - protocol: tcp
+          port: 9330
+          service: roon
+
+        - protocol: tcp
+          port: 9331
+          service: roon
+
+        - protocol: tcp
+          port: 9332
+          service: roon
+
+        - protocol: tcp
+          port: 9333
+          service: roon
+
+        - protocol: tcp
+          port: 9001
+          service: roon
+
+        - protocol: tcp
+          port: 9002
+          service: roon
+
+        - protocol: tcp
+          port: 49863
+          service: roon
+
+        - protocol: tcp
+          port: 52667
+          service: roon
+
+        - protocol: tcp
+          port: 52709
+          service: roon
+
+        - protocol: tcp
+          port: 63098
+          service: roon
+
+        - protocol: tcp
+          port: 63099
+          service: roon
+
+        - protocol: tcp
+          port: 63100
+          service: roon
+
+services:
+    roon:
+        image: docker.1ms.run/volschin/roon:v2.34.0
+        user: root
+        binds:
+            - /lzcapp/run/mnt/home/music:/music
+            - /lzcapp/var/data:/data
+            - /lzcapp/var/backup:/backup
+ext_config:
+    enable_document_access: true
+    enable_media_access: true
