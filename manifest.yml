@@ -8,7 +8,7 @@ author: roon
 application:
   subdomain: roon
   background_task: true
-
+  multi_instance: true
   public_path:
     - /
   routes:
