@@ -23,7 +23,7 @@ services:
     user: root
     binds:
       - /lzcapp/run/mnt/home/music:/music
-      - /lzcapp/var/data:/data
+      - /lzcapp/var/data:/var/roon
       - /lzcapp/var/backup:/backup
     net_admin: true
     network_mode: host
