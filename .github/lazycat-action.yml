@@ -1,0 +1,39 @@
+version: 1
+
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: .lazycat-build/roon.lpk
+  target_arch: amd64
+
+update:
+  strategy: publish
+  allow_downgrade: false
+  version_source:
+    type: image
+    image: roon
+build:
+  run_buildscript: false
+images:
+  # 上游 czyt/roon 有 v2.52.1538 三段 SemVer 家族；2025.06.27 为年份干扰 tag，排除
+  - id: roon
+    target: service
+    service: roon
+    source: czyt/roon
+    channel: stable
+    sort: semver
+    tag_regex: '^v?\d+\.\d+\.\d+$'
+    exclude_regex: '^(18|19|20)\.'
+    delivery:
+      mode: lazycat
+stores:
+  official:
+    enabled: true
+    skip_if_version_exists: true
+    changelog_locales: [zh, en]
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: RoonServer
+    summary: "关于音乐的一切--浏览、发现、收集和聆听"
