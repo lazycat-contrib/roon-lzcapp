@@ -1,7 +1,6 @@
 ext_config:
   enable_document_access: true
   enable_media_access: true
-
 application:
   subdomain: roon
   background_task: true
@@ -14,7 +13,7 @@ application:
 services:
   roon:
     # upstream: czyt/roon:v2.52.1538
-    image: czyt/roon:v2.52.1538
+    image: registry.lazycat.cloud/czyt/czyt/roon:a13e1221b1b468c9
     user: root
     binds:
       - /lzcapp/run/mnt/home/music:/music
